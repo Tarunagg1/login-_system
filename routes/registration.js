@@ -12,6 +12,7 @@ router.post('/',async (req,res)=>{
             const newuser = new register(req.body);
             // const token = await newuser.genrateauttoken();
             // console.log(token);
+            // res.cookie('jwt',token);
             const res = await newuser.save();
             res.status(200).render('login');
         }else{

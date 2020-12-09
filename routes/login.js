@@ -16,7 +16,10 @@ router.post('/', async (req,res)=>{
             const ismatch = await bcrypt.compare(password,emaildata.password);
             if(ismatch){
                 const token = await emaildata.genrateauttoken();
-                console.log(token);
+                res.cookie('jwt',token,{
+                    expires:new Date(Date.now() + 900000000),
+                    httpOnly:true
+                });
                 res.render('index');
             }else{
                 res.status(401).send("Password is not");
